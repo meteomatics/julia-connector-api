@@ -5,11 +5,11 @@ directory structure needs to be as follows:
 README.md
 ...
 ...
-|__ MeteomaticsAPI
-    |__ Manifest.tml
-    |__ Project.tml
-    |__ src
-        |__ Config
+- MeteomaticsAPI
+  - Manifest.tml
+  - Project.tml
+  - src
+    - Config
         |__ DataTypes
         |__ Exceptions
         |__ MeteomaticsAPI
