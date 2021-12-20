@@ -10,9 +10,9 @@ README.md
   - Project.tml
   - src
     - Config
-        |__ DataTypes
-        |__ Exceptions
-        |__ MeteomaticsAPI
-        |__ ParserFunctions
-        |__ QueryFunctions
-        |__ tests
+    - DataTypes
+    - Exceptions
+    - MeteomaticsAPI
+    - ParserFunctions
+    - QueryFunctions
+    - tests
