@@ -1,7 +1,7 @@
 # julia-connector-api
 
 ## installation 
-In a Julia REPL hit the `]` key to enter Package Manager mode. Then type `add https://github.com/meteomatics/julia-connector-api`.
+In a Julia REPL hit the `]` key to enter Package Manager mode. Then type `add https://github.com/meteomatics/julia-connector-api`. To leave Package Manager mode again, hit `backspace`.
 Alternatively, in a Julia script or REPL, type `using Pkg` to import the Package Manager module. Then execute `Pkg.add(url="https://github.com/meteomatics/julia-connector-api")`.
 
 ## usage
