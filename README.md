@@ -1,4 +1,7 @@
-# julia-connector-api
+[![logo](https://static.meteomatics.com/meteomatics-logo.png)](https://www.meteomatics.com "Meteomatics - Your Experts in Weather Data Processing")
+
+Julia connector to the [Meteomatics Weather API](https://www.meteomatics.com/en/weather-api/)
+========================================================================================
 
 ## installation 
 In a Julia REPL hit the `]` key to enter Package Manager mode. Then type `add https://github.com/meteomatics/julia-connector-api`. To leave Package Manager mode again, hit `backspace`.
