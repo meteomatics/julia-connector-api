@@ -1,7 +1,7 @@
 name = "MeteomaticsAPI"
 uuid = "b93e97fc-8f80-4e4b-9d18-63072fc718ec"
 authors = ["Eager Tom <teldridge@meteomatics.com>"]
-version = "0.1.0"
+version = "0.2.0"
 
 [deps]
 CSV = "336ed68f-0bac-5ca0-87d4-7b16caf5d00b"
