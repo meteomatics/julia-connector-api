@@ -11,7 +11,6 @@ availablemodels = [
     "mix",
     "ecmwf-ifs",
     "ecmwf-ens",
-    "ecmwf-ens-cluster",
     "ecmwf-ens-tc",
     "ecmwf-vareps",
     "ecmwf-mmsf",
@@ -52,16 +51,12 @@ ensemblemodels = Dict(
     "ncep-gfs-ens" => [string(x) for x in 0:1:31]
 )
 
-clustermodels = Dict(
-    "as above" => "so below"
-)
-
 """
 Optional arguments should be checked to ensure that they correspond to valid API calls.
-Some of these have not been implemented yet: valid ens_select and cluster_select depend on the chosen model,
+Some of these have not been implemented yet: valid ens_select depends on the chosen model,
 and I don't have complete information on this to hand as of the time of first draft.
 """
-function checkopts(model, calibrated, mask, ens_select, cluster_select, timeout)
+function checkopts(model, calibrated, mask, ens_select, timeout)
     if model === nothing
     else
         @assert in(model, availablemodels)
@@ -73,7 +68,6 @@ function checkopts(model, calibrated, mask, ens_select, cluster_select, timeout)
         @assert mask == "land" || mask == "sea"
     end
     # @assert ens_select belongs to some group of valid values (dependent on model) or is nothing
-    # @assert cluster_select as above 
     timeout::Union{Integer, Nothing}
 end
 
@@ -86,8 +80,8 @@ to avoid having to provide the information for every request. Optional arguments
 https://www.meteomatics.com/en/api/request/optional-parameters/ for more details and default behaviour.
 """
 function querytimeseries(coordinate_list, startdate, enddate, interval, parameters; username=username, password=password,
-        model=nothing, calibrated=nothing, mask=nothing, ens_select=nothing, cluster_select=nothing, timeout=nothing)
-    checkopts(model, calibrated, mask, ens_select, cluster_select, timeout)
+        model=nothing, calibrated=nothing, mask=nothing, ens_select=nothing, timeout=nothing)
+    checkopts(model, calibrated, mask, ens_select, timeout)
     url = parse_url(
         username, 
         password, 
@@ -100,7 +94,6 @@ function querytimeseries(coordinate_list, startdate, enddate, interval, paramete
                 "calibrated" => calibrated,
                 "mask" => mask,
                 "ens_select" => ens_select,
-                "cluster_select" => cluster_select,
                 "timeout" => timeout
             )
         )
@@ -117,8 +110,8 @@ to avoid having to provide the information for every request. Optional arguments
 https://www.meteomatics.com/en/api/request/optional-parameters/ for more details and default behaviour.
 """
 function querygrid(startdate, parameter::String, north, west, south, east, reslat, reslon; username=username, password=password,
-        model=nothing, calibrated=nothing, mask=nothing, ens_select=nothing, cluster_select=nothing, timeout=nothing)
-    checkopts(model, calibrated, mask, ens_select, cluster_select, timeout)
+        model=nothing, calibrated=nothing, mask=nothing, ens_select=nothing, timeout=nothing)
+    checkopts(model, calibrated, mask, ens_select, timeout)
     url = parse_url(
         username, 
         password, 
@@ -131,7 +124,6 @@ function querygrid(startdate, parameter::String, north, west, south, east, resla
                 "calibrated" => calibrated,
                 "mask" => mask,
                 "ens_select" => ens_select,
-                "cluster_select" => cluster_select,
                 "timeout" => timeout
             )
         )
@@ -158,12 +150,12 @@ to avoid having to provide the information for every request. Optional arguments
 https://www.meteomatics.com/en/api/request/optional-parameters/ for more details and default behaviour.
 """
 function querygrid(startdate, parameters::Vector{String}, north, west, south, east, reslat, reslon; username=username, password=password,
-    model=nothing, calibrated=nothing, mask=nothing, ens_select=nothing, cluster_select=nothing, timeout=nothing)
+    model=nothing, calibrated=nothing, mask=nothing, ens_select=nothing, timeout=nothing)
     if length(parameters) == 1
         return querygrid(startdate, parameters[1], north, west, south, east, reslat, reslon; username=username, password=password,
-        model=model, calibrated=calibrated, mask=mask, ens_select=ens_select, cluster_select, timeout=timeout)
+        model=model, calibrated=calibrated, mask=mask, ens_select=ens_select, timeout=timeout)
     else
-        checkopts(model, calibrated, mask, ens_select, cluster_select, timeout)
+        checkopts(model, calibrated, mask, ens_select, timeout)
         url = parse_url(
             username, 
             password, 
@@ -176,7 +168,6 @@ function querygrid(startdate, parameters::Vector{String}, north, west, south, ea
                     "calibrated" => calibrated,
                     "mask" => mask,
                     "ens_select" => ens_select,
-                    "cluster_select" => cluster_select,
                     "timeout" => timeout
                 )
             )
